@@ -6,7 +6,9 @@ apt update && sudo apt upgrade -y
 apt remove docker-ce docker-ce-cli containerd.io -y
 apt remove docker docker-engine docker.io containerd runc -y
 
-# Configurar repositorios
+# 
+# Actualizar el índice de paquetes apt e instalar paquetes para permitir que apt utilice un repositorio a través de HTTPS:
+# 
 apt update
 apt install \
   ca-certificates \
@@ -14,11 +16,11 @@ apt install \
   gnupg \
   lsb-release
 
-# Add Docker’s official GPG key:
+# Añade la clave GPG oficial de Docker
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
-# Use the following command to set up the repository:
+# Utilice el siguiente comando para configurar el repositorio:
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
